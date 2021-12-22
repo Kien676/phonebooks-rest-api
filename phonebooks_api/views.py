@@ -112,13 +112,5 @@ class PhonebookViewSet(viewsets.ModelViewSet):
     queryset= models.Phonebook.objects.all()
     authentication_classes=(TokenAuthentication,)
     permission_classes = (permissions.UpdatePhonebook,)
-    """The permission classes is set to see whether the user gets permission to do certain things  """
     filter_backends = (filters.SearchFilter,)
-    """This will mean that the django rest framework will allow us to search for items in this view set by the name or email field"""
     search_fields = ('name','email', )
-
-
-class UserLoginApiView(ObtainAuthToken):
-      """Handle creating user authentication tokens"""
-      renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
-      """this will add the renderer class to our obtain auth token view which will enable it in the django admin, as the auth token doesn't have the renderer class by default so we need to add it manually"""
