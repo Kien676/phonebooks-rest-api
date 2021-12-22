@@ -114,3 +114,8 @@ class PhonebookViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.UpdatePhonebook,)
     filter_backends = (filters.SearchFilter,)
     search_fields = ('name','email', )
+
+class UsersLoginApiView(ObtainAuthToken):
+      """Handle creating user authentication tokens"""
+      renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
+      
