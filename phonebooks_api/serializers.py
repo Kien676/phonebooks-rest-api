@@ -30,3 +30,10 @@ class PhonebookSerializer(serializers.ModelSerializer):
         )
 
         return user
+
+class ProfileFeedItemSerializer(serializers.ModelSerializer):
+    """Serialize profile feed items"""
+    class Meta:
+        model = models.userPhonebook
+        fields = ('id','user_profile','phone_username','phone_number','created_on')
+        extra_kwargs={'user_profile':{'read_only':True}}

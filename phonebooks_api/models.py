@@ -66,3 +66,27 @@ class Phonebook(AbstractBaseUser, PermissionsMixin):
         def __str__(self):
             """Return string representation of our user"""
             return self.email
+
+
+class userPhonebook(models.Model):
+    """The user profile is the profile that that owns or created the profile feed item"""
+    user_profile = models.ForeignKey(
+
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+
+    phone_username= models.CharField(max_length=255)
+
+    phone_number= models.CharField(max_length=255)
+
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def get_phone_name(self):
+        """Retrieve short name of user"""
+        return self.phone_username
+
+    def __str__(self):
+
+        return self.phone_number
+# Create your models here.

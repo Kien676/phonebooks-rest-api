@@ -118,4 +118,19 @@ class PhonebookViewSet(viewsets.ModelViewSet):
 class UsersLoginApiView(ObtainAuthToken):
       """Handle creating user authentication tokens"""
       renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
-      
+
+class UsersPhonebookViewSet(viewsets.ModelViewSet):
+    """Handle  creating, reading and updating profiles feed items"""
+    authentication_classes =(TokenAuthentication, )
+    serializer_class = serializers.ProfileFeedItemSerializer
+    queryset = models.userPhonebook.objects.all()
+    """So this set up a basic model viewset that allow us to create and manage feed item objects in the database"""
+    permission_classes = (
+        permissions.UpdateOwnStatus,
+        IsAuthenticated
+    )
+
+
+    def perform_create(self,serializer):
+            """Set the user profile to the logged in user"""
+            serializer.save(user_profile= self.request.user)
