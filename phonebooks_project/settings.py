@@ -23,15 +23,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'k!lwu%-u%%@emyo!8tq7ebf*1mjl5(f#66%@m!^2=aj6m-5m*w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(int(os.environ.get('DEBUG',1)))
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = [
+    'ec2-3-15-154-234.us-east-2.compute.amazonaws.com'
+    '127.0.0.1'
+]
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,10 +43,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'phonebooks_api',
+
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,7 +58,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'phonebooks_project.urls'
-CORS_ALLOW_ALL_ORIGINS=True
+
 
 TEMPLATES = [
     {
@@ -126,3 +129,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'phonebooks_api.Phonebook'
+
+STATIC_ROOT= 'static/'
